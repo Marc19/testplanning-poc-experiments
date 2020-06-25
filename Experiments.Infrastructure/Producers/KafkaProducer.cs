@@ -16,7 +16,8 @@ namespace Experiments.Infrastructure.Producers
         {
             _producerConfig = new ProducerConfig
             {
-                BootstrapServers = "localhost:9092",
+                //BootstrapServers = "localhost:9092",
+                BootstrapServers = "10.55.120.230:9092/",
             };
         }
 
@@ -37,8 +38,18 @@ namespace Experiments.Infrastructure.Producers
                 using (var producer = new ProducerBuilder<Null, string>(_producerConfig).Build())
                 {
                     Type type = message.GetType();
-                    var t = await producer.ProduceAsync(topicName,
-                        new Message<Null, string> { Value = messageJson });
+
+                    try
+                    {
+                        var t = await producer.ProduceAsync(topicName,
+                            new Message<Null, string> { Value = messageJson });
+
+                        Console.Write(t);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Write("hi");
+                    }
 
                     //t.Wait();
 

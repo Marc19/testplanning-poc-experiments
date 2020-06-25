@@ -23,7 +23,8 @@ namespace Experiments.Services
             _consumerConfig = new ConsumerConfig
             {
                 GroupId = "experiments-microservice-consumer",
-                BootstrapServers = "localhost:9092",
+                //BootstrapServers = "localhost:9092",
+                BootstrapServers = "10.55.120.230:9092/",
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
 
